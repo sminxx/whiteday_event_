@@ -19,11 +19,12 @@ body {
 
   background-image:
     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("01_new.JPG");   /* ← 여기 대문자 JPG */
+    url("01_new.JPG");
 
-  background-size: cover;
+  background-size: contain;   /* 🔥 여기 변경 */
   background-position: center;
   background-repeat: no-repeat;
+  background-color: #000;     /* 🔥 여백 검정 */
 
   font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   overflow: hidden;
@@ -130,7 +131,10 @@ const result = document.getElementById("result");
 
 yesBtn.addEventListener("click", () => {
   document.body.style.backgroundImage =
-    'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("02_new.JPG")';  /* ← 여기 대문자 JPG */
+    'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("02_new.JPG")';
+  
+  document.body.style.backgroundSize = "contain";  /* 🔥 클릭 후에도 contain 유지 */
+  document.body.style.backgroundColor = "#000";
 
   result.style.display = "block";
   createHearts();
