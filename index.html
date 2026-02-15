@@ -106,13 +106,14 @@ const footerText = document.getElementById("footerText");
 const noBtn = document.getElementById("noBtn");
 
 /* 첫 화면 이미지 (수정하지 않음) */
-bgImage.style.backgroundImage = "url('01_new.jpg')";
+bgImage.style.backgroundImage = "url('01_new.JPG')";
 
 /* YES 누르면 다음 페이지 */
 function goNext() {
   if(page === 1) {
     page = 2;
-    bgImage.style.backgroundImage = "url('02_new.jpg')";
+    bgImage.style.backgroundImage = "url('02_new.JPG
+      ')";
     mainText.innerHTML = "진짜로?";
     footerText.innerHTML = "❤️ 애들 부르면 죽음 ❤️";
   } else {
