@@ -3,109 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>최지형은 보거라</title>
+<title>화이트데이 이벤트</title>
 
 <style>
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-button { -webkit-appearance: none; appearance: none; font: inherit; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Apple SD Gothic Neo", sans-serif;
+}
 
 body {
-  margin: 0;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-image:
-    linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("01_new.JPG");
-
-  background-size: contain;   /* 🔥 여기 변경 */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #000;     /* 🔥 여백 검정 */
-
-  font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  overflow: hidden;
-  transition: background-image 0.5s ease;
-  padding: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: url('bg.jpg') no-repeat center top;
+  background-size: contain;   /* ⭐ 사진 잘리게 안함 */
+  background-color: black;    /* 위아래 여백은 블랙 */
 }
 
+/* 위쪽 여백 (사진 잘 보이게) */
+.top-space {
+  flex: 1;
+}
+
+/* 하단 카드 */
 .card {
   background: rgba(255,255,255,0.95);
-  padding: 32px;
-  border-radius: 20px;
+  border-radius: 30px 30px 0 0;
+  padding: 40px 25px;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-  max-width: 420px;
-  width: 100%;
 }
 
-h1 {
-  font-size: 20px;
-  margin-bottom: 24px;
-  line-height: 1.6;
+.card h1 {
+  font-size: 22px;
+  margin-bottom: 30px;
+  line-height: 1.5;
 }
 
-.btn-container {
-  position: relative;
-  width: 280px;
-  height: 56px;
-  margin: 0 auto;
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-.btn {
-  position: absolute;
-  top: 0;
-  width: 120px;
-  height: 48px;
-  border-radius: 30px;
+button {
   border: none;
-  font-size: 16px;
+  padding: 15px 40px;
+  font-size: 18px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: transform 0.15s ease;
-  user-select: none;
 }
-
-.btn:active { transform: scale(0.98); }
 
 .yes {
-  left: 0;
-  background: #ff4d6d;
+  background-color: #ff4d6d;
   color: white;
-  z-index: 2;
 }
 
 .no {
-  left: 160px;
-  background: #d6d6d6; 
-  color: #111;
-  z-index: 1;
+  background-color: #ccc;
 }
 
-.result {
-  margin-top: 18px;
-  font-size: 20px;
-  font-weight: bold;
+.footer-text {
+  margin-top: 25px;
+  font-size: 18px;
   color: #ff4d6d;
-  display: none;
-}
-
-.heart {
-  position: fixed;
-  pointer-events: none;
-  animation: float 2.8s linear forwards;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-300px); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
+
+<div class="top-space"></div>
 
 <div class="card">
   <h1>
@@ -113,75 +83,15 @@ h1 {
     화이트데이에 데이트 하자
   </h1>
 
-  <div class="btn-container" id="btnArea">
-    <button class="btn yes" id="yesBtn" type="button">Yes</button>
-    <button class="btn no" id="noBtn" type="button">No</button>
+  <div class="buttons">
+    <button class="yes">Yes</button>
+    <button class="no">No</button>
   </div>
 
-  <div class="result" id="result">
+  <div class="footer-text">
     ❤️ 데이트확정 애들부르면 죽어 ❤️
   </div>
 </div>
-
-<script>
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const btnArea = document.getElementById("btnArea");
-const result = document.getElementById("result");
-
-yesBtn.addEventListener("click", () => {
-  document.body.style.backgroundImage =
-    'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("02_new.JPG")';
-  
-  document.body.style.backgroundSize = "contain";  /* 🔥 클릭 후에도 contain 유지 */
-  document.body.style.backgroundColor = "#000";
-
-  result.style.display = "block";
-  createHearts();
-});
-
-function createHearts() {
-  for (let i = 0; i < 20; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.textContent = "❤️";
-    heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.top = window.innerHeight + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2800);
-  }
-}
-
-function moveNo() {
-  const w = 120;
-  const h = 48;
-
-  const maxX = btnArea.clientWidth - w;
-  const maxY = btnArea.clientHeight - h;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.left = x + "px";
-  noBtn.style.top  = y + "px";
-}
-
-noBtn.addEventListener("mouseenter", moveNo);
-noBtn.addEventListener("pointerdown", (e) => {
-  e.preventDefault();
-  moveNo();
-}, { passive: false });
-
-noBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  moveNo();
-});
-
-window.addEventListener("load", () => {
-  noBtn.style.left = "160px";
-  noBtn.style.top = "0px";
-});
-</script>
 
 </body>
 </html>
