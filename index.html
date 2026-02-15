@@ -20,14 +20,15 @@ body {
   background-color: black;
 }
 
-/* 🔥 위쪽 배경 이미지 */
+/* 위쪽 배경 */
 .top-image {
   flex: 1;
-  background: url('bg.jpg') no-repeat center top;
-  background-size: contain;  /* 잘리지 않게 */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center top;
 }
 
-/* 🔥 아래 팝업 카드 */
+/* 아래 카드 */
 .card {
   background: rgba(255,255,255,0.95);
   border-radius: 30px 30px 0 0;
@@ -44,7 +45,7 @@ body {
 
 .buttons {
   position: relative;
-  height: 70px;
+  height: 80px;
 }
 
 button {
@@ -78,31 +79,52 @@ button {
 
 <body>
 
-<div class="top-image"></div>
+<div class="top-image" id="bgImage"></div>
 
 <div class="card">
-  <h1>
+  <h1 id="mainText">
     발렌타인데이는 못했는데<br>
     화이트데이에 데이트 하자
   </h1>
 
   <div class="buttons">
-    <button class="yes" onclick="alert('데이트 확정 ❤️')">Yes</button>
+    <button class="yes" onclick="goNext()">Yes</button>
     <button class="no" id="noBtn">No</button>
   </div>
 
-  <div class="footer-text">
+  <div class="footer-text" id="footerText">
     ❤️ 데이트확정 애들부르면 죽어 ❤️
   </div>
 </div>
 
 <script>
+let page = 1;
+
+const bgImage = document.getElementById("bgImage");
+const mainText = document.getElementById("mainText");
+const footerText = document.getElementById("footerText");
 const noBtn = document.getElementById("noBtn");
 
+/* 첫 화면 이미지 */
+bgImage.style.backgroundImage = "url('01.jpg')";
+
+/* YES 누르면 다음 페이지 */
+function goNext() {
+  if(page === 1) {
+    page = 2;
+    bgImage.style.backgroundImage = "url('02.jpg')";
+    mainText.innerHTML = "내 마음을 받아줄래?";
+    footerText.innerHTML = "❤️ 이제 도망 못가 ❤️";
+  } else {
+    alert("데이트 확정 ❤️");
+  }
+}
+
+/* NO 버튼 도망 */
 noBtn.addEventListener("mouseover", function() {
-  const x = Math.random() * 200;
-  const y = Math.random() * 40;
-  noBtn.style.transform = `translate(${x}px, ${-y}px)`;
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 60 - 30;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
 });
 </script>
 
