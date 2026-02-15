@@ -19,7 +19,7 @@ body {
 
   background-image:
     linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-    url("01_new.jpg");
+    url("01_new.JPG");   /* ← 여기 대문자 JPG */
 
   background-size: cover;
   background-position: center;
@@ -130,7 +130,7 @@ const result = document.getElementById("result");
 
 yesBtn.addEventListener("click", () => {
   document.body.style.backgroundImage =
-    'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("02_new.jpg")';
+    'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url("02_new.JPG")';  /* ← 여기 대문자 JPG */
 
   result.style.display = "block";
   createHearts();
